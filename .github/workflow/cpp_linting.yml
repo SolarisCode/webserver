@@ -1,0 +1,45 @@
+name: Cpp Linting
+
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '**.log'
+      - '**.yml'
+
+jobs:
+  Linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4.1.1
+
+      - name: Run my Linting action
+        uses: SolarisCode/custom-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WEB_SERVER_TOKEN: ${{ secrets.WEB_SERVER_TOKEN }}
+        with:
+          args: "FIXIT"
+
+      - name: Check for Fixed errors
+        id: changes_check
+        run: |
+          if git diff --quiet; then
+            echo "No changes were detected!"
+            echo "changed=false" > $GITHUB_OUTPUT
+          else
+            echo "Changes were detected!"
+            echo "changed=true" > $GITHUB_OUTPUT
+          fi
+
+      - name: Upload fixed files as an Artifact
+        if: success() && steps.changes_check.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpp_fixed_files
+          path: |
+            ./includes
+            ./srcs

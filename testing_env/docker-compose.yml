@@ -1,0 +1,10 @@
+version: "2.24.5"
+
+
+services:
+  linting:
+    container_name: linting
+    build: .
+    image: linting:1.1
+    volumes:
+      - ../:/code
