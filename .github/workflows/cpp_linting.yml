@@ -1,9 +1,8 @@
 name: Cpp Linting
 
 on: 
-  push:
-    branches:
-      - main
+  push: 
+    branches: [ main, http_req_parser, cgi, networking, configuration_parser ]
     paths-ignore:
       - '**.md'
       - '**.log'
