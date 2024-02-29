@@ -1,3 +1,1 @@
-void name_() {
-    
-}
+void name_() {}
