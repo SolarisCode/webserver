@@ -1,7 +1,7 @@
 name: Cpp Linting
 
 on: 
-  push:
+  push: [ main, http_req_parser ]
     paths-ignore:
       - '**.md'
       - '**.log'
