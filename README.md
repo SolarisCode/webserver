@@ -19,4 +19,7 @@ if you would like to check for linting errors before pushing to you branch follo
 5- If you want to fix the errors, make sure to uncomment this line in 'Dockerfile'
     `CMD [ "FIXIT" ]`
 
-6- Then run step "4" again.
+6- Then run this command to rebuild the 'docker image' first and repeat 'step 3' after
+    `docker compose build`
+
+7- Then run step "4" again to clean up.
