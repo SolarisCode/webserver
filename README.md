@@ -7,19 +7,19 @@ if you would like to check for linting errors before pushing to you branch follo
 1- You should first install docker on your machine.
 
 2- If you want to only expose the errors make sure this line is commented in 'Dockerfile'
-    `#CMD [ "FIXIT" ]`
+    ```#CMD [ "FIXIT" ]```
     
 3- Run this command while you are the 'testing_env' directory
-    `docker compose up`
+    ```docker compose up```
     it will show all the linting errors for the cpp and hpp files.
 
 4- Run this command to delete what was created in the past command
-    `docker compose down`
+    ```docker compose down```
 
 5- If you want to fix the errors, make sure to uncomment this line in 'Dockerfile'
-    `CMD [ "FIXIT" ]`
+    ```CMD [ "FIXIT" ]```
 
 6- Then run this command to rebuild the 'docker image' first and repeat 'step 3' after
-    `docker compose build`
+    ```docker compose build```
 
 7- Then run step "4" again to clean up.
