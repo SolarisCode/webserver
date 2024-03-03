@@ -1,8 +1,11 @@
 name: Cpp Linting
 
-on: 
-  push: 
-    branches: [ main, http_req_parser, cgi, networking, configuration_parser ]
+on:
+  branch_protection_rule:
+    types: [created]
+
+  push:
+    branches: [main, http_req_parser, cgi, networking, configuration_parser]
     paths-ignore:
       - '**.md'
       - '**.log'
@@ -10,7 +13,13 @@ on:
 
 jobs:
   Linting:
+
+    permissions:
+      contents: "read"
+      packages: "read"
+      issues: "write"
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4.1.1
@@ -19,7 +28,6 @@ jobs:
         uses: SolarisCode/custom-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WEB_SERVER_TOKEN: ${{ secrets.WEB_SERVER_TOKEN }}
         with:
           args: "FIXIT"
 
